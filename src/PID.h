@@ -17,6 +17,12 @@ public:
   double Ki;
   double Kd;
 
+
+    double dp[3] = {1.0, 1.0, 1.0};
+    double best_err ;
+    double err = 0;
+    int n = 0;
+
   /*
   * Constructor
   */
@@ -41,6 +47,10 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+   void Twiddle();
+
+    double TwiddleError(double p []);
 };
 
 #endif /* PID_H */
