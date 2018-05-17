@@ -19,6 +19,7 @@ void PID::Init(double Kp, double Ki, double Kd) {
     this->Ki = Ki;
     this->Kd = Kd;
     best_err= std::numeric_limits<double>::max();
+    n=1;
 }
 
 void PID::UpdateError(double cte) {
@@ -55,7 +56,11 @@ void PID::Twiddle() {
         cout << "Kp " << p[0] << ", Ki " << p[1] << ", Kd " << p[2] << endl;
         cout << "dKp " << dp[0] << ", dKi " << dp[1] << ", dKd " << dp[2] << endl;
         for (int j = 0; j < 3; ++j) {
+            cout << "p["<<j<<"] " << p[j]<< endl;
+
             p[j] += dp[j];
+            cout << "p["<<j<<"] " << p[j]<< endl;
+
             double error = TwiddleError(p);
 
             if (error*error < best_err) {
@@ -79,4 +84,7 @@ void PID::Twiddle() {
     Kp = p[0];
     Ki = p[1];
     Kd = p[2];
+
+    cout << " Twiddled Kp " << p[0] << ", Twiddled Ki " << p[1] << ",  Twiddled Kd " << p[2] << endl;
+
 }
